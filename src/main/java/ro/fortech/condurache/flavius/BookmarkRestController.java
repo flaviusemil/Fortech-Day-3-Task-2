@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.Collection;
 
 /**
@@ -27,17 +28,17 @@ class BookmarkRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    Collection<Bookmark> readBookmarks(@PathVariable String userId) {
-        this.validateUser(userId);
-        return this.bookmarkRepository.findByAccountUsername(userId);
+    Collection<Bookmark> readBookmarks(Principal principal) {
+        this.validateUser(principal);
+        return this.bookmarkRepository.findByAccountUsername(principal.getName());
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<?> add(@PathVariable String userId, @RequestBody Bookmark input) {
-        this.validateUser(userId);
+    ResponseEntity<?> add(Principal principal, @RequestBody Bookmark input) {
+        this.validateUser(principal);
 
         return this.accountRepository
-                .findByUsername(userId)
+                .findByUsername(principal.getName())
                 .map(account -> {
                     Bookmark bookmark = bookmarkRepository.save(new Bookmark(account, input.uri, input.description));
 
@@ -48,21 +49,25 @@ class BookmarkRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{bookmarkId}")
-    Bookmark readBookmark(@PathVariable String userId, @PathVariable Long bookmarkId) {
-        this.validateUser(userId);
+    Bookmark readBookmark(Principal principal, @PathVariable Long bookmarkId) {
+        this.validateUser(principal);
         return this.bookmarkRepository.findOne(bookmarkId);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{bookmarkId}")
-    Collection<Bookmark> deleteBookmark(@PathVariable String userId, @PathVariable Long bookmarkId) {
-        this.validateUser(userId);
+    Collection<Bookmark> deleteBookmark(Principal principal, @PathVariable Long bookmarkId) {
+        this.validateUser(principal);
 
         this.bookmarkRepository.delete(bookmarkId);
 
-        return this.readBookmarks(userId);
+        return this.readBookmarks(principal);
     }
 
-    private void validateUser(String userId) {
-        this.accountRepository.findByUsername(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    private void validateUser(Principal principal) {
+        String userId = principal.getName();
+        this.accountRepository
+                .findByUsername(userId)
+                .orElseThrow(
+                        () -> new UserNotFoundException(userId));
     }
 }
