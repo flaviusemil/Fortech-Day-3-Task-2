@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Created by internship on 05.07.2017.
+ * Bookmark Controller Advice
  */
 
 @RestControllerAdvice

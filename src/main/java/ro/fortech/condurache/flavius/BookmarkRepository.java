@@ -6,6 +6,7 @@ import java.util.Collection;
 
 /**
  * Created by internship on 05.07.2017.
+ * Bookmark Repository
  */
 
 public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {

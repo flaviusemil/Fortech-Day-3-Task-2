@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 
 /**
  * Created by internship on 05.07.2017.
+ * OAuth2 Configuration File
  */
 
 @Configuration

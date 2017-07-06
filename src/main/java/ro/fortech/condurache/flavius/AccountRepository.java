@@ -6,6 +6,7 @@ import java.util.Optional;
 
 /**
  * Created by internship on 05.07.2017.
+ * Account Repository
  */
 
 public interface AccountRepository extends JpaRepository<Account, Long> {

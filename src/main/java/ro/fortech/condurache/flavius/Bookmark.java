@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 /**
  * Created by internship on 05.07.2017.
+ * Bookmark Entity
  */
 
 @Entity

@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * Created by internship on 05.07.2017.
+ * Account Entity
  */
 
 @Entity

@@ -12,6 +12,7 @@ import java.util.Collection;
 
 /**
  * Created by internship on 05.07.2017.
+ * Bookmark REST Controller
  */
 
 @RestController
@@ -42,7 +43,7 @@ class BookmarkRestController {
                 .map(account -> {
                     Bookmark bookmark = bookmarkRepository.save(new Bookmark(account, input.uri, input.description));
 
-                    Link forOneBookmark = new BookmarkResource(bookmark).getLink("self");
+                    Link forOneBookmark = new BookmarkResource(bookmark, principal).getLink("self");
 
                     return ResponseEntity.created(URI.create(forOneBookmark.getHref())).build();
                 }).orElse(ResponseEntity.noContent().build());

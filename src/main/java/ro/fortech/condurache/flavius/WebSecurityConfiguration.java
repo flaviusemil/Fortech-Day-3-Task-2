@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * Created by internship on 05.07.2017.
+ * Web Security Configuration
  */
 
 @Configuration

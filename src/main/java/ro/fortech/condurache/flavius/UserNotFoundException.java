@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Created by internship on 05.07.2017.
+ * Custom Exception: User Not Found - 404
  */
 
 class UserNotFoundException extends RuntimeException {
