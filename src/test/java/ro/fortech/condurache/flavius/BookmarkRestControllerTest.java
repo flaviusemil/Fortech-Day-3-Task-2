@@ -136,8 +136,7 @@ public class BookmarkRestControllerTest {
                 .principal(testPrincipal())
                 .contentType(contentType)
                 .content(bookmarkJson))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$", is("test")));
+                .andExpect(status().isCreated());
     }
 
     @Test
