@@ -53,5 +53,8 @@ public class Bookmark {
     }
     // </editor-fold>
 
-
+    protected void update(Bookmark bookmark) {
+        this.uri = bookmark.uri;
+        this.description = bookmark.description;
+    }
 }
