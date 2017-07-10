@@ -157,8 +157,6 @@ public class BookmarkRestControllerTest {
 
         Bookmark bookmark = new Bookmark(account, "http://orion.com", "My simple website");
 
-        System.out.println("Principal: " + json(bookmark));
-
         this.mockMvc.perform(put("/bookmarks/" + this.bookmarkList.get(0).getId())
                 .principal(testPrincipal())
                 .header(auth[0], auth[1])
